@@ -26,8 +26,10 @@ def download_advent_of_code_data(advent_of_code_website, year, data_folder_locat
     - Currently it uses the GitHub credentials (Google and twitter oath are also available) if provided, otherwise it
     will require manual login in the browser window.
     - Currently it assumes the problems have been solved in the past, or nothing is saved.
+    - No error handling is done, so if something goes wrong, it will just crash.
+    - No statistics are saved (e.g. how many people solved the problem, how long it took, etc.)
     """
-    print("Starting data download")
+    logging.info("Starting data download")
     save_folder_path = Path(data_folder_location) / str(year)
     save_folder_path.mkdir(parents=True, exist_ok=True)
 
@@ -51,9 +53,9 @@ def download_advent_of_code_data(advent_of_code_website, year, data_folder_locat
         wait.until(EC.presence_of_element_located((By.NAME, "commit"))).click()
         # Here two-factor authentication is required and might have to be done manually.
     # Wait until we are back at advent of code
-    print("Waiting for manually finishing login")
+    logging.info("Waiting for manually finishing login")
     WebDriverWait(browser, 1000).until(EC.title_contains('Advent of Code'))
-    print("Login finished, continuing data download")
+    logging.info("Login finished, continuing data download")
 
     # For each day:
     for day in range(1, 26):
@@ -84,6 +86,8 @@ def download_advent_of_code_data(advent_of_code_website, year, data_folder_locat
 
 
 if __name__ == '__main__':
+    # Add the main logger to print to the prompt
+    logging.basicConfig(level=logging.INFO)
     # Get the user credentials to use from the environment variables
     download_advent_of_code_data(
         advent_of_code_website='https://adventofcode.com',
