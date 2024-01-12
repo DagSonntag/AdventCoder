@@ -41,3 +41,6 @@ What is not in scope:
 ## Framework design
 
 ## TODO:
+- Build a basic LLM agent with the correct methods
+- Build a framework for evaluating the agent on the downloaded problems
+- Visualize the results

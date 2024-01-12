@@ -81,6 +81,14 @@ def download_advent_of_code_data(advent_of_code_website, year, data_folder_locat
                 f.write(question_text[i].get_attribute('innerHTML'))
             with open(save_folder_path / f"day_{day}_part_{i + 1}_ans.txt", 'w') as f:
                 f.write(ans)
+
+        # Then also save the input data
+        browser.get(f'{advent_of_code_website}/{year}/day/{day}/input')
+        # Wait until the input data is loaded
+        body_text = wait.until(EC.presence_of_element_located((By.TAG_NAME, "Body"))).text
+        # Save the input data
+        with open(save_folder_path / f"day_{day}_input.txt", 'w') as f:
+            f.write(body_text)
     browser.close()
     print("Finished downloading data")
 
