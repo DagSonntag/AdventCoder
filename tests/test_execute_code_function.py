@@ -1,4 +1,6 @@
 import pytest
+from unittest.mock import patch
+import adventcoder.execute_code as execute_code_file
 from adventcoder.execute_code import execute_code
 
 
@@ -47,13 +49,15 @@ def aoc(input_data):
     assert output == expected_output, f"Expected '{expected_output}', but got '{output}'"
 
 
-@pytest.mark.skip(reason="This test takes 60 seconds to run")
-def test_execute_code_infinite_loop():
+def test_execute_code_infinite_loop(monkeypatch):
+
     python_code = """
 def aoc(input_data):
     while True:
         pass
 """
     input_data_str = "test input"
+    monkeypatch.setattr(execute_code_file, 'GENERATED_CODE_EXECUTION_TIMEOUT', 1)
+
     with pytest.raises(TimeoutError):
         execute_code(python_code, input_data_str)

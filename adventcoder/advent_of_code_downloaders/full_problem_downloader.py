@@ -7,7 +7,7 @@ import logging
 from pathlib import Path
 import os
 
-from adventcoder.file_path_templates import get_problem_answer_path, get_problem_input_text_path, get_problem_input_html_path, \
+from adventcoder.constants.file_path_templates import get_problem_answer_path, get_problem_input_text_path, get_problem_input_html_path, \
     get_problem_input_data_path
 
 

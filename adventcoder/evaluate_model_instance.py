@@ -1,6 +1,6 @@
 import logging
 from adventcoder.models.vertex_ai_model import VertexAiModel
-from adventcoder.file_path_templates import *
+from adventcoder.constants.file_path_templates import *
 from adventcoder.execute_code import execute_code
 
 
