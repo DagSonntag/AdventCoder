@@ -90,6 +90,7 @@ def download_advent_of_code_data(advent_of_code_website: str, year: int, data_fo
         browser.get(f'{advent_of_code_website}/{year}/day/{day_nr}/input')
         # Wait until the input data is loaded
         body_text = wait.until(ec.presence_of_element_located((By.TAG_NAME, "Body"))).text
+        body_text += '\n'  # Add a newline at the end of the file
         # Save the input data
         with open(get_problem_input_data_path(data_folder_location, year, day_nr), 'w') as f:
             f.write(body_text)
